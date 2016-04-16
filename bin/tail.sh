@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Usage: ./tail.sh <SCRIPT_LOG_DIR> <TARGET_LOG_FILE> <COMMAND>
+# Usage: ./tail.sh <TARGET_LOG_FILE> <COMMAND>
 
 function init_env()
 {
-    USAGE_TEXT="Usage: tail.sh <SCRIPT_LOG_DIR> <TARGET_LOG_FILE> <COMMAND>"
+    USAGE_TEXT="Usage: tail.sh <TARGET_LOG_FILE> <COMMAND>"
     FILE_MODIFICATION_INTERVAL=1 # minute
     LINE_NUMBER_TO_TAIL=1
 
@@ -28,13 +28,6 @@ function init_env()
 
 function parse_params()
 {
-    script_log_dir=$1
-    if [[ $script_log_dir == "" ]]; then
-        echo "No LOG_DIR specified, $USAGE_TEXT"
-        exit 1
-    fi
-
-    shift
     target_log_file=$1
     if [[ $target_log_file == "" ]]; then
         echo "No CHANNEL specified, $USAGE_TEXT"
