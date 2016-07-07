@@ -1,9 +1,15 @@
 # Operation Scripts
 
-## Recipe 1: Tail error log and send it to slack
+## Recipe 1: check error was occurred in last 1 minute and send it to slack 
 
-```
-$ ./bin/tail.sh /var/log/nginx/access.log ./bin/slack.sh $PWD/log PROGRAM_NAME https://slack.com/api/chat.postMessage SLACK_TOKEN SLACK_CHANNEL
+```shell
+$ ./bin/stat.sh /var/log/nginx/access.log ./bin/slack.sh $PWD/logs PROGRAM_NAME https://slack.com/api/chat.postMessage SLACK_TOKEN SLACK_CHANNEL
 ```
 
-You run this command every minute by registering it to the crontab
+Register this command to the crontab
+
+## Recipe 2: tail error and send it to slack
+
+```shell
+nohup ./bin/tail. /var/log/nginx/access.log ./bin/slack.sh $PWD/logs PROGRAM_NAME https://slack.com/api/chat.postMessage SLACK_TOKEN SLACK_CHANNEL > /dev/null 2>&1&
+```
