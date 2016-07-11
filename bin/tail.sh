@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# Usage: ./tail-f.sh <TARGET_LOG_FILE> <COMMAND>
+# Usage: ./tail.sh <TARGET_FILE> <COMMAND>
 
 function init_env()
 {
-    USAGE_TEXT="Usage: tail-f.sh <TARGET_LOG_FILE> <COMMAND>"
+    USAGE_TEXT="Usage: tail.sh <TARGET_FILE> <COMMAND>"
 
-    GREP_PROGRAM=$(which grep)
     TAIL_PROGRAM=$(which tail)
 }
 
@@ -13,7 +12,7 @@ function parse_params()
 {
     target_log_file=$1
     if [[ $target_log_file == "" ]]; then
-        echo "No TARGET_LOG_FILE specified, $USAGE_TEXT"
+        echo "No TARGET_FILE specified, $USAGE_TEXT"
         exit 1
     fi
 
@@ -30,6 +29,6 @@ function parse_params()
 init_env
 parse_params $@
 
-tail -n0 -F $target_log_file | while read LINE; do
-  $command $LINE
+$TAIL_PROGRAM -n0 -F $target_log_file | while read LINE; do
+  echo $LINE | eval $command
 done

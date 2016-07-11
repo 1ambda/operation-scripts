@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Usage: ./stat.sh <TARGET_LOG_FILE> <COMMAND>
+# Usage: ./stat.sh <TARGET_FILE> <COMMAND>
 
 function init_env()
 {
-    USAGE_TEXT="Usage: stat.sh <TARGET_LOG_FILE> <COMMAND>"
+    USAGE_TEXT="Usage: stat.sh <TARGET_FILE> <COMMAND>"
     FILE_MODIFICATION_INTERVAL=1 # minute
     LINE_NUMBER_TO_TAIL=1
 
@@ -30,7 +30,7 @@ function parse_params()
 {
     target_log_file=$1
     if [[ $target_log_file == "" ]]; then
-        echo "No TARGET_LOG_FILE specified, $USAGE_TEXT"
+        echo "No TARGET_FILE specified, $USAGE_TEXT"
         exit 1
     fi
 
